@@ -1,0 +1,50 @@
+
+Brief description:
+The delivery company manages one delivery man who has to send several packages that are about to approach the deadline (or have already surpassed the deadline) to multiple places from the headquarter and return back to the headquarter within the shortest path.
+
+Directory/Files:
+DeliveryProblem
+    │  City.cpp
+    │  City.h
+    │  DeliveryProblem.cpp
+    │  Destinfo.cpp
+    │  Destinfo.h
+    │  HashMap.cpp
+    │  HashMap.h
+    │  MyHeap.cpp
+    │  MyHeap.h
+    │  Packinfo.cpp
+    │  Packinfo.h
+    │  README
+
+Input: 
+The main executable file is called DeliveryProblem.cpp. 
+The user is able to run DeliveryProblem.cpp and input the suitable number to run the program code. 
+As the complexity of the postman delivery problem is O(n^2 2^n). I carefully restrict the number of cities (city_num) to be less than or equal to 30 and the number of packages (package_num) to be 10000.
+The program will keep asking the user until the given number is in the correct range.
+
+After user inputs a correct number, the main cpp file will record city_num and package_num.
+After getting the city_num: 
+1. The program will generate a matrix of city_num * city_num distance matrix from RandomLocation in City.cpp.
+2. The program will generate a packinfo matrix containing time_t (Deadline) and int (package_id) from setPackinfo in Packinfo.cpp.
+3. The program will call hashmap class containing package_id and city_id (destination)and generate hashmap of Destinfo from Destinfo in Destinfo.cpp (As hashmap is not implemented, using void setPackinfo function to represent Hashmap).
+
+After getting the package_num:
+1. The program will use max-heap to get Kmin Deadline to find packages to deliver from KminDate in MyHeap.cpp and its input is package_num and packinfo.
+2. Use hash stucture to find which place (destination) to send these packages from packageToSentDestination in Destinfo.cpp, its input is vector of ids and its return is vector of destinations.
+3. Generate a matrix of Distance Matrix from packages' destination from packageMatrix in Destinfo.cpp .
+4. Calculate the shortest path using Dynamic program from shortestpath in City.cpp and its return is vector.
+
+City.cpp: 
+RandomLocation: its input is city_num, its return is a 2d vector.
+Shortestpath: its input is a 2d vector, its return is a 1d vector.
+
+Packinfo.cpp:
+setPackinfo: its input is city_num, its return is vector of time_t and int pairs
+
+Destinfo.cpp:
+packageToSentDestination: its input is 1dvector of ids, its return is 1dvector of destinations.
+packageMatrix: its input is vector of city, its return is a 2d vector.
+
+MyHeap.cpp:
+KminDate: its input is package_num and packinfo, its return is 1dvector of ids.
